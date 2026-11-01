@@ -339,7 +339,9 @@ private:
     }
 
     if (status.state == PlannerStatus::State::kAccepted) {
-      publish_status("succeeded", "Принято планировщиком: " + reply_base);
+      // Goal acceptance is NOT the execution result. The current gateway
+      // reports submission/acceptance only; do not mislead the operator UI.
+      publish_status("accepted", "Принято планировщиком: " + reply_base);
       active_goal_handle_.clear();
       active_goal_summary_.clear();
     }
