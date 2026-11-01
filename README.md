@@ -81,8 +81,10 @@ The node uses the `robot_planner` goal gateway:
 
 The gateway reports `submitted/accepted/rejected`. Execution status is limited to what
 this topic provides; with the default `robot_planner` implementation the final status
-means goal acceptance/rejection (not full execution tracking). Enable
-`publish_planner_feedback=true` if you want intermediate status messages.
+means goal acceptance/rejection (not full execution tracking). An `accepted` response
+is published as `status: accepted`, **never** as `succeeded`. Actual plan completion
+requires a future PlanSys2 executor status adapter (see `PLAN.md`). Enable
+`publish_planner_feedback=true` to receive intermediate gateway handoff updates.
 
 ## Output contract
 
