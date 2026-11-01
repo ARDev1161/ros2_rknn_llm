@@ -1,0 +1,23 @@
+name: Planner status contract
+
+on:
+  push:
+    branches: [feat/rc-api-v2]
+    paths:
+      - "src/**"
+      - "include/**"
+      - "tests/**"
+      - ".github/workflows/rc-api-v2.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  planner-status-regression:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify LLM and planner handoff status contract
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
